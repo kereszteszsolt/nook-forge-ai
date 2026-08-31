@@ -10,7 +10,7 @@ In progress. `NFA-001` through `NFA-003` are implemented, while the remaining Re
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
-| [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | Pending | Implemented |
+| [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `21f48fa` | Implemented |
 | [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-006`](stories/NFA-006-add-the-first-structured-ai-task.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -51,7 +51,7 @@ The Java 21 container emitted a non-failing Mockito dynamic-agent and Surefire d
 
 ## NFA-003 focused checks
 
-The maintainer approved the plan and implementation separately on 2026-08-31. No Penpot link was supplied, so no Penpot structure, write, ID, export, or final handoff is claimed; `NFA-007` still owns the first deterministic browser evidence.
+The maintainer approved the plan, implementation, and commit separately on 2026-08-31. Implementation commit `21f48fa` records the verified Angular shell and token flow; no Penpot link was supplied, so no Penpot structure, write, ID, export, or final handoff is claimed, and `NFA-007` still owns the first deterministic browser evidence.
 
 Acceptance criteria were checked in their listed order:
 
