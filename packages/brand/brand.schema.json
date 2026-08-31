@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nookforge.local/schemas/brand.schema.json",
+  "title": "Nook Forge brand contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "productName",
+    "extendedName",
+    "tagline",
+    "technical"
+  ],
+  "properties": {
+    "productName": {
+      "const": "Nook Forge"
+    },
+    "extendedName": {
+      "const": "Nook Forge AI"
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "technical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "appId",
+        "javaPackage",
+        "mavenArtifact",
+        "npmScope",
+        "dockerProject",
+        "database",
+        "storyPrefix"
+      ],
+      "properties": {
+        "repository": {
+          "const": "nook-forge-ai"
+        },
+        "appId": {
+          "const": "nook-forge-ai"
+        },
+        "javaPackage": {
+          "const": "io.nookforge"
+        },
+        "mavenArtifact": {
+          "const": "nook-forge-api"
+        },
+        "npmScope": {
+          "const": "@nookforge/*"
+        },
+        "dockerProject": {
+          "const": "nookforge"
+        },
+        "database": {
+          "const": "nookforge"
+        },
+        "storyPrefix": {
+          "const": "NFA"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# Local runtime configuration
+.env
+.env.*
+!.env.example
+
+# Java and Maven
+apps/api/.mvn/wrapper/maven-wrapper.jar
+apps/api/target/
+*.class
+*.log
+
+# Node and Angular
+node_modules/
+apps/web/.angular/
+apps/web/dist/
+coverage/
+
+# Tests and tooling
+playwright-report/
+test-results/
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Local data and generated artifacts
+.local/
+data/
+workspaces/
+artifacts/
+*.tmp
+
+# Python repository-audit cache
+__pycache__/
+*.py[cod]

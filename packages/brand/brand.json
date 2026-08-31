@@ -1,0 +1,15 @@
+{
+  "productName": "Nook Forge",
+  "extendedName": "Nook Forge AI",
+  "tagline": "Turn local files into useful work.",
+  "technical": {
+    "repository": "nook-forge-ai",
+    "appId": "nook-forge-ai",
+    "javaPackage": "io.nookforge",
+    "mavenArtifact": "nook-forge-api",
+    "npmScope": "@nookforge/*",
+    "dockerProject": "nookforge",
+    "database": "nookforge",
+    "storyPrefix": "NFA"
+  }
+}

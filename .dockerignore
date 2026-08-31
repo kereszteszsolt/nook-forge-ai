@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+!.env.example
+**/node_modules
+**/target
+**/dist
+**/coverage
+**/test-results
+**/playwright-report
+.local
+data
+workspaces
+artifacts
