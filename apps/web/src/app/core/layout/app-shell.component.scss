@@ -1,0 +1,152 @@
+/* SPDX-FileCopyrightText: 2026 Keresztes Zsolt <https://kereszteszsolt.hu> */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 10;
+  inset-block-start: var(--nf-space-3);
+  inset-inline-start: var(--nf-space-3);
+  padding: var(--nf-space-2) var(--nf-space-4);
+  border-radius: var(--nf-radius-control);
+  color: var(--nf-color-text-inverse);
+  background: var(--nf-color-action-primary);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nf-space-4);
+  min-height: 5rem;
+  padding: var(--nf-space-3) var(--nf-space-5);
+  border-block-end: 1px solid var(--nf-color-border-subtle);
+  background: var(--nf-color-surface-panel);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nf-space-3);
+  text-decoration: none;
+}
+
+.brand__mark {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: var(--nf-radius-control);
+  color: var(--nf-color-text-inverse);
+  font-weight: var(--nf-type-weight-bold);
+  background: var(--nf-color-surface-strong);
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand small {
+  color: var(--nf-color-text-secondary);
+  font-size: var(--nf-type-size-small);
+}
+
+.provider-state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nf-space-2);
+  padding: var(--nf-space-2) var(--nf-space-3);
+  border: 1px solid var(--nf-color-border-subtle);
+  border-radius: var(--nf-radius-pill);
+  color: var(--nf-color-status-unavailable);
+  font-size: var(--nf-type-size-small);
+  font-weight: var(--nf-type-weight-medium);
+  background: var(--nf-color-surface-subtle);
+}
+
+.provider-state__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--nf-radius-pill);
+  background: currentcolor;
+}
+
+.workspace-shell {
+  display: grid;
+  grid-template-columns: var(--nf-layout-sidebar) minmax(0, 1fr);
+  max-width: var(--nf-layout-content-max);
+  min-height: calc(100dvh - 5rem);
+  margin-inline: auto;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nf-space-1);
+  padding: var(--nf-space-5) var(--nf-space-4);
+  border-inline-end: 1px solid var(--nf-color-border-subtle);
+}
+
+.navigation a {
+  padding: var(--nf-space-3) var(--nf-space-4);
+  border-radius: var(--nf-radius-control);
+  color: var(--nf-color-text-secondary);
+  font-weight: var(--nf-type-weight-medium);
+  text-decoration: none;
+}
+
+.navigation a:hover,
+.navigation__link--active {
+  color: var(--nf-color-text-primary) !important;
+  background: var(--nf-color-action-subtle);
+}
+
+main {
+  min-width: 0;
+  padding: var(--nf-space-6);
+}
+
+@media (width <= 48rem) {
+  .topbar {
+    align-items: flex-start;
+    padding-inline: var(--nf-space-4);
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .provider-state {
+    white-space: nowrap;
+  }
+
+  .workspace-shell {
+    display: block;
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--nf-space-3) var(--nf-space-4);
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--nf-color-border-subtle);
+  }
+
+  .navigation a {
+    text-align: center;
+  }
+
+  main {
+    padding: var(--nf-space-5) var(--nf-space-4);
+  }
+}

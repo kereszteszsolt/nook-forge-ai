@@ -2,7 +2,7 @@
 
 ## Source
 
-`NFA-003` creates `packages/design-tokens/tokens.json` after the first design plan is approved. The checked JSON file is the runtime source for generated CSS custom properties and any Angular theme bridge.
+`NFA-003` creates `packages/design-tokens/tokens.json` as the runtime source for checked CSS custom properties. The Angular build consumes only the generated repository output.
 
 ## Token groups
 

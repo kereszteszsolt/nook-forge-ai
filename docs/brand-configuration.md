@@ -14,7 +14,7 @@ Canonical product and technical identity lives in [`packages/brand/brand.json`](
 
 Application stories may generate Java and TypeScript constants from this contract or read a checked build artifact. They must not create different product names in each app.
 
-Brand colors and visual tokens are not fixed by this planning archive. `NFA-003` and `NFA-007` establish them through the approved design-token and Penpot workflow.
+`NFA-003` establishes the first semantic visual tokens and generates the Angular brand constant from this contract. `NFA-007` owns the first final Penpot handoff and browser evidence.
 
 ## GitHub repository metadata
 

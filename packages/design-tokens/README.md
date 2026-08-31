@@ -1,5 +1,14 @@
-# Design token package placeholder
+# Nook Forge design tokens
 
-`NFA-003` creates the first approved `tokens.json` file and its generated CSS output. Token names and checked values live in this repository. Penpot is the design and handoff workspace, not a runtime dependency or the only copy of a design decision. A supplied design link is inspected before planning when MCP is available.
+[`tokens.json`](tokens.json) is the reviewed runtime source for Nook Forge design values. The dependency-free generator writes [`generated/tokens.css`](generated/tokens.css) with stable `--nf-*` custom properties.
 
-See [the token contract](../../docs/design/token-contract.md) and [the Penpot handoff guide](../../docs/design/README.md).
+From `apps/web`, run:
+
+```bash
+npm run tokens:generate
+npm run tokens:check
+```
+
+The first set covers semantic color, type, space, radius, elevation, and motion names. Components consume the generated properties; the CSS output is not hand-edited.
+
+Penpot remains a design handoff tool rather than a runtime dependency. `NFA-007` owns the first final Penpot handoff and deterministic browser evidence.

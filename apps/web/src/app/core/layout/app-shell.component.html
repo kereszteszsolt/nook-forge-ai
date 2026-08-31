@@ -1,0 +1,50 @@
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="topbar">
+  <a class="brand" routerLink="/" aria-label="Nook Forge dashboard">
+    <span class="brand__mark" aria-hidden="true">NF</span>
+    <span>
+      <strong>{{ brand.productName }}</strong>
+      <small>{{ brand.tagline }}</small>
+    </span>
+  </a>
+
+  <div class="provider-state" [attr.data-state]="apiAvailability.state">
+    <span class="provider-state__dot" aria-hidden="true"></span>
+    <span>{{ apiAvailability.label }}</span>
+  </div>
+</header>
+
+<div class="workspace-shell">
+  <nav class="navigation" aria-label="Primary navigation">
+    <a
+      routerLink="/"
+      routerLinkActive="navigation__link--active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+      >Dashboard</a
+    >
+    <a
+      routerLink="/tasks/new"
+      routerLinkActive="navigation__link--active"
+      ariaCurrentWhenActive="page"
+      >New task</a
+    >
+    <a
+      routerLink="/history"
+      routerLinkActive="navigation__link--active"
+      ariaCurrentWhenActive="page"
+      >History</a
+    >
+    <a
+      routerLink="/monitoring"
+      routerLinkActive="navigation__link--active"
+      ariaCurrentWhenActive="page"
+      >Monitoring</a
+    >
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

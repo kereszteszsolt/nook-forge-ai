@@ -1,3 +1,19 @@
-# Web application placeholder
+# Nook Forge web
 
-`NFA-003` creates the Angular application under this directory. The final app uses strict TypeScript, feature-owned state, a shared typed API boundary, repository design tokens, and privacy-safe Playwright evidence. The UI workflow uses read-first Penpot handoff when a design link is supplied and keeps browser evidence under `docs/screenshots`.
+This directory contains the Angular shell implemented by `NFA-003`. It uses standalone route boundaries, strict TypeScript, Vitest, Angular ESLint, the canonical repository brand, and generated repository design tokens.
+
+## Native commands
+
+Run these commands with Node 24.20.0 and npm 11.19.0:
+
+```bash
+npm ci
+npm run lint
+npm test
+npm run generate:check
+npm run build
+```
+
+Use `npm run generate` after an approved change to `packages/brand/brand.json` or `packages/design-tokens/tokens.json`. The committed generated files must pass their drift checks.
+
+The current shell does not call the product API. Dashboard, new-task, history, monitoring, unavailable-service, and unknown-route states are local UI boundaries for later stories.

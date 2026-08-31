@@ -2,7 +2,7 @@
 
 ## Status
 
-In progress. `NFA-001` and `NFA-002` are implemented, while the remaining Release 0.1 stories stay planned.
+In progress. `NFA-001` through `NFA-003` are implemented, while the remaining Release 0.1 stories stay planned.
 
 ## Story evidence
 
@@ -10,7 +10,7 @@ In progress. `NFA-001` and `NFA-002` are implemented, while the remaining Releas
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
-| [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
+| [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | Pending | Implemented |
 | [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-006`](stories/NFA-006-add-the-first-structured-ai-task.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -48,6 +48,27 @@ Acceptance criteria were checked in their listed order:
 The repository audit passed with 3 agents, 6 skills, 36 stories, and valid local links. All 6 audit unit tests passed, `git diff --check` passed, and repository text rules normalize both Wrapper scripts and other tracked text to LF.
 
 The Java 21 container emitted a non-failing Mockito dynamic-agent and Surefire dumpstream warning. The final Maven process still exited successfully with the exact passing counts above. A read-only review found four issues in source-of-truth wording, coverage evidence, framework 4xx handling, and URI validation; all four were fixed, their focused tests passed, and the re-review found no regression.
+
+## NFA-003 focused checks
+
+The maintainer approved the plan and implementation separately on 2026-08-31. No Penpot link was supplied, so no Penpot structure, write, ID, export, or final handoff is claimed; `NFA-007` still owns the first deterministic browser evidence.
+
+Acceptance criteria were checked in their listed order:
+
+1. Angular CLI 22.1.6 generated the standalone zoneless workspace with strict compiler settings, while `package.json` pins Node 24.20.0, npm 11.19.0, Angular 22.1.4, TypeScript 6.0.3, and every direct npm dependency without ranges; `package-lock.json` uses lockfile version 3.
+2. Six unit tests passed for canonical identity, active navigation, the dashboard, `/tasks/new`, `/history`, explicit monitoring unavailability, the `**` fallback, and the privacy-safe visible bootstrap-error fallback.
+3. Inspection found live feature code under `features/dashboard`, `features/tasks`, and `features/monitoring`, shared empty-state UI under `shared/ui`, and used layout, API, configuration, not-found, and startup-error boundaries under `core` without empty forwarding folders.
+4. `npm run tokens:check` passed after the dependency-free generator compared `packages/design-tokens/tokens.json` with the checked `generated/tokens.css`; the Angular production build loads that CSS before application styles.
+5. The generated CSS contains stable kebab-case `--nf-*` names for semantic color, type, space, radius, elevation, and motion groups, plus the small shell layout group.
+6. Component and stylesheet inspection found a skip link, semantic header, navigation, and main landmarks, `aria-current`, text-backed status meaning, visible `:focus-visible`, a narrow two-column navigation state, empty states, explicit unavailable API text, and reduced-motion handling.
+7. In the pinned Node container, `npm run lint` passed; `npm test` passed 2 files and 6 tests; both token and brand drift checks passed; and `npm run build` produced a 230.44 kB initial production bundle with five lazy route chunks.
+8. `npm ls --depth=0` passed with the exact direct tree, while direct-package and source scans found no global state library, second UI component library, `fetch`, or `HttpClient` use.
+
+The web checks used `node:24.20.0-bookworm-slim`, resolved at manifest digest `sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e`, with Node 24.20.0 and npm 11.19.0. The final direct tool set was Angular CLI and build tooling 22.1.6, Angular 22.1.4, TypeScript 6.0.3, Vitest 4.1.11, Angular ESLint 22.2.0, and ESLint 10.9.1.
+
+`npm ci` emitted a non-failing npm 11 notice for four transitive packages whose install scripts are not covered by an explicit allow list. Lint, tests, drift checks, production compilation, and dependency-tree validation still exited successfully; no host Node installation was used, and the run-owned Linux dependency tree was removed from the Windows checkout after verification.
+
+A read-only review found missing explicit strict compiler switches, a hidden bootstrap-failure state, and an unapproved Angular scaffold favicon. The fixes enabled TypeScript and Angular template strictness, added a tested visible privacy-safe startup fallback, removed the framework asset and raw theme color, and passed the full web suite and re-review without a remaining finding.
 
 ## Release-wide checks
 

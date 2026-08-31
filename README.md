@@ -2,12 +2,12 @@
 
 > **Turn local files into useful work.**
 
-![NFA-002 implemented](https://img.shields.io/badge/status-NFA--002%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
+![NFA-003 implemented](https://img.shields.io/badge/status-NFA--003%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square&labelColor=2B3137)](LICENSE)
 ![Local first](https://img.shields.io/badge/local--first-Ollama-2EA44F?style=flat-square&labelColor=2B3137)
 ![Java](https://img.shields.io/badge/Java-21-E76F00?style=flat-square&labelColor=2B3137&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-planned-6DB33F?style=flat-square&labelColor=2B3137&logo=springboot&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-planned-DD0031?style=flat-square&labelColor=2B3137&logo=angular&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-6DB33F?style=flat-square&labelColor=2B3137&logo=springboot&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-22.1.4-DD0031?style=flat-square&labelColor=2B3137&logo=angular&logoColor=white)
 ![LangChain4j](https://img.shields.io/badge/LangChain4j-planned-8B5CF6?style=flat-square&labelColor=2B3137)
 ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-planned-2496ED?style=flat-square&labelColor=2B3137&logo=docker&logoColor=white)
 
@@ -15,11 +15,11 @@ Nook Forge AI is a local-first workspace for analyzing files and ZIP archives, c
 
 ## Current status
 
-The repository baseline from `NFA-001` and the reviewed Spring Boot API shell from `NFA-002` are implemented. The API includes an official Maven Wrapper and verified local HTTP foundation, but it is not yet a product workflow; the archive also contains the approved architecture direction, release maps, 36 ordered stories, Codex roles, repository skills, configuration rules, ADRs, security rules, visual-documentation rules, and verification scripts.
+The repository baseline from `NFA-001`, the reviewed Spring Boot API shell from `NFA-002`, and the Angular shell from `NFA-003` are implemented. The API has a verified local HTTP foundation, while the web app has strict route boundaries, repository tokens, empty states, and an explicit unavailable-API state.
 
-Beyond the verified API foundation, the product remains a planning and governance baseline, not a runnable application.
+Both shells build and test independently, but together they remain a planning and governance baseline, not a runnable application or joined product workflow.
 
-Product features remain planned until their owning stories are implemented and verified. Angular, Docker Compose, Ollama, Langfuse, Prometheus, and Grafana do not run in the current repository state.
+Product features remain planned until their owning stories are implemented and verified. Docker Compose, Ollama, Langfuse, Prometheus, and Grafana do not run in the current repository state.
 
 The repository is maintained as a personal portfolio project. No external development workflow is defined at this stage.
 

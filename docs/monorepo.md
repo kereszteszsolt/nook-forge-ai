@@ -51,7 +51,7 @@ The API starts as one Maven module and one deployable Spring Boot process. Featu
 ## Shared contracts
 
 - Product identity lives in `packages/brand/brand.json`.
-- Design tokens live in `packages/design-tokens` after `NFA-003`.
+- Design tokens live in `packages/design-tokens`, with checked CSS generated for the Angular build.
 - The backend publishes OpenAPI.
 - The frontend consumes one typed API client generated or checked from that contract.
 - Java domain classes are not shared as source with TypeScript.

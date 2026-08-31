@@ -10,8 +10,8 @@ This page lists the approved direction. Package files, lock files, wrappers, ima
 | Spring Boot 4.1.1 | HTTP, configuration, persistence integration, Actuator | Verified API shell |
 | LangChain4j | AI Services, prompts, structured outputs, Ollama integration | Planned in `NFA-006` |
 | Maven Wrapper 3.3.4 / Maven 3.9.16 | Java build and pinned build entry | Generated and verified in `NFA-002` |
-| Angular | task and workspace user interface | Planned in `NFA-003` |
-| TypeScript strict mode | web contracts and checks | Planned in `NFA-003` |
+| Angular 22.1.4 | standalone task and workspace user-interface shell | Verified by the `NFA-003` build |
+| TypeScript 6.0.3 strict mode | web contracts and checks | Verified by `NFA-003` |
 | PostgreSQL | task, workspace, file, step, and artifact metadata | Planned in `NFA-004` |
 | Flyway | schema history and repeatable local setup | Planned in `NFA-004` |
 | Ollama | default and only model provider through 0.5 | Planned in `NFA-005` and `NFA-006` |
@@ -41,6 +41,8 @@ A broad parser library may be used only if its dependency and security cost is r
 | Spotless 3.9.0 and google-java-format 1.36.0 | stable Java source style |
 
 The API build also pins Maven Compiler Plugin 3.15.0, Surefire 3.5.5, Enforcer 3.6.3, Site Plugin 3.22.0, JaCoCo 0.8.15, and Resources Plugin 3.5.0. These versions appear in `apps/api/pom.xml`, while the exact build proof is recorded in the release verification file.
+
+The web build pins Node 24.20.0, npm 11.19.0, Angular CLI and build tooling 22.1.6, Vitest 4.1.11, Angular ESLint 22.2.0, and ESLint 10.9.1. Exact direct and transitive npm versions are recorded in `apps/web/package-lock.json`.
 
 Do not install two tools for the same job without a measured reason.
 

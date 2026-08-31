@@ -1,0 +1,187 @@
+/* SPDX-FileCopyrightText: 2026 Keresztes Zsolt <https://kereszteszsolt.hu> */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  font-family: var(--nf-type-family-base);
+  background: var(--nf-color-surface-canvas);
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100dvh;
+  margin: var(--nf-space-0);
+  color: var(--nf-color-text-primary);
+  font-size: var(--nf-type-size-body);
+  line-height: var(--nf-type-line-height-body);
+  background: var(--nf-color-surface-canvas);
+}
+
+.bootstrap-error {
+  max-width: 42rem;
+  margin: var(--nf-space-7) auto;
+  padding: var(--nf-space-6);
+  border: 1px solid var(--nf-color-border-subtle);
+  border-inline-start: 0.25rem solid var(--nf-color-status-failed);
+  border-radius: var(--nf-radius-panel);
+  background: var(--nf-color-surface-panel);
+  box-shadow: var(--nf-elevation-panel);
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+p {
+  margin-block-start: var(--nf-space-0);
+}
+
+h1 {
+  margin-block-end: var(--nf-space-3);
+  font-size: clamp(var(--nf-type-size-heading), 5vw, var(--nf-type-size-title));
+  line-height: var(--nf-type-line-height-compact);
+}
+
+h2 {
+  margin-block-end: var(--nf-space-2);
+  font-size: var(--nf-type-size-heading);
+  line-height: var(--nf-type-line-height-compact);
+}
+
+p {
+  color: var(--nf-color-text-secondary);
+}
+
+.page-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--nf-space-4);
+  margin-block-end: var(--nf-space-5);
+}
+
+.eyebrow {
+  margin-block-end: var(--nf-space-2);
+  color: var(--nf-color-action-primary);
+  font-size: var(--nf-type-size-small);
+  font-weight: var(--nf-type-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-panel,
+.empty-state {
+  padding: var(--nf-space-6);
+  border: 1px solid var(--nf-color-border-subtle);
+  border-radius: var(--nf-radius-panel);
+  background: var(--nf-color-surface-panel);
+  box-shadow: var(--nf-elevation-panel);
+}
+
+.empty-state {
+  max-width: 42rem;
+  text-align: center;
+}
+
+.empty-state__mark {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  margin: var(--nf-space-0) auto var(--nf-space-4);
+  place-items: center;
+  border-radius: var(--nf-radius-panel);
+  color: var(--nf-color-action-primary);
+  font-size: var(--nf-type-size-heading);
+  background: var(--nf-color-action-subtle);
+}
+
+.primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: var(--nf-space-2) var(--nf-space-4);
+  border: 1px solid var(--nf-color-action-primary);
+  border-radius: var(--nf-radius-control);
+  color: var(--nf-color-text-inverse);
+  font-weight: var(--nf-type-weight-medium);
+  text-decoration: none;
+  background: var(--nf-color-action-primary);
+}
+
+.primary-action:hover {
+  border-color: var(--nf-color-action-primary-hover);
+  background: var(--nf-color-action-primary-hover);
+}
+
+.status-card {
+  display: flex;
+  gap: var(--nf-space-3);
+  align-items: flex-start;
+  max-width: 42rem;
+  padding: var(--nf-space-4);
+  border: 1px solid var(--nf-color-border-subtle);
+  border-inline-start: 0.25rem solid var(--nf-color-status-unavailable);
+  border-radius: var(--nf-radius-control);
+  background: var(--nf-color-surface-panel);
+}
+
+.status-card strong,
+.status-card span {
+  display: block;
+}
+
+.status-card strong {
+  margin-block-end: var(--nf-space-1);
+}
+
+.status-card span {
+  color: var(--nf-color-text-secondary);
+}
+
+button,
+a {
+  transition:
+    color var(--nf-motion-duration-fast) var(--nf-motion-easing-standard),
+    background-color var(--nf-motion-duration-fast) var(--nf-motion-easing-standard),
+    border-color var(--nf-motion-duration-fast) var(--nf-motion-easing-standard);
+}
+
+:focus-visible {
+  outline: 0.125rem solid var(--nf-color-border-focus);
+  outline-offset: 0.1875rem;
+  box-shadow: var(--nf-elevation-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (width <= 48rem) {
+  .page-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-action {
+    width: 100%;
+  }
+
+  .page-panel,
+  .empty-state {
+    padding: var(--nf-space-5);
+  }
+}

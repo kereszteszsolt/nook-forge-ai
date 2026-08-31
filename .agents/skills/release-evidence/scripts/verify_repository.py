@@ -333,6 +333,7 @@ text_paths = [
     for path in ROOT.rglob("*")
     if path.is_file()
     and path.name != "LICENSE"
+    and path.name != "package-lock.json"
     and path.resolve() != Path(__file__).resolve()
     and path.suffix in {".md", ".toml", ".py", ".json"}
 ]

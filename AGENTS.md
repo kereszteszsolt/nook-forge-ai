@@ -8,7 +8,7 @@ The core path is small: add files, choose a task, watch clear steps, inspect a s
 
 ## Planning state
 
-This repository contains the verified runnable API shell from `NFA-002`. It does not yet contain a web app, database migration, Compose stack, AI feature, or runnable product workflow, so the remaining scope stays a planning and governance baseline.
+This repository contains the verified runnable API shell from `NFA-002` and Angular shell from `NFA-003`. It does not yet contain a database migration, Compose stack, AI feature, joined API flow, or runnable product workflow, so the remaining scope stays a planning and governance baseline.
 
 A plan is not implemented behavior. Do not write docs, badges, examples, or release notes that claim a command or feature works before its story is implemented and verified.
 

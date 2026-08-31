@@ -2,7 +2,7 @@
 
 ## Current state
 
-The verified Spring Boot API shell and Maven Wrapper now exist under `apps/api`. The Angular project remains planned for `NFA-003`.
+The verified Spring Boot API shell and Maven Wrapper exist under `apps/api`. The verified Angular shell, npm lock, Vitest checks, lint rules, and token flow exist under `apps/web`.
 
 ## Native tool ownership
 
@@ -31,7 +31,7 @@ No story may hide all work behind one opaque wrapper command. The README may add
 
 The `NFA-002` build pins Spring Boot 4.1.1, compiler 3.15.0, Surefire 3.5.5, Enforcer 3.6.3, Site 3.22.0, Spotless 3.9.0 with google-java-format 1.36.0, JaCoCo 0.8.15, Resources 3.5.0, ArchUnit 1.5.0, and Maven 3.9.16 as the Wrapper target. The build checks Java 21, plugin versions, dependency convergence, formatting, tests, architecture, and line coverage.
 
-## Planned Angular rules
+## Angular rules
 
 - Use the Angular CLI and strict TypeScript.
 - Use standalone components and route-level feature boundaries.
@@ -47,7 +47,7 @@ The `NFA-002` build pins Spring Boot 4.1.1, compiler 3.15.0, Surefire 3.5.5, Enf
 - Keep keyboard, focus, label, contrast, overflow, and reduced-motion behavior tested.
 - Use one UI primitive strategy and do not mix component libraries.
 
-Exact Angular and test-runner versions are locked by `NFA-003` after supported tool checks.
+`NFA-003` pins Angular 22.1.4, Angular CLI and build tooling 22.1.6, TypeScript 6.0.3, Vitest 4.1.11, Angular ESLint 22.2.0, and Node 24.20.0 with npm 11.19.0.
 
 ## Local development
 
@@ -60,13 +60,13 @@ cd apps/api
 ```
 
 ```bash
-# Web after NFA-003
+# Web
 cd apps/web
 npm ci
 npm start
 ```
 
-PostgreSQL and Ollama may run natively or through the documented Compose services. The web uses a same-origin or development proxy for `/api` and task events.
+The current shell makes no product API request. PostgreSQL, Ollama, a same-origin API connection, and task events stay planned for their owning stories.
 
 ## Branch and story scope
 
