@@ -6,10 +6,10 @@ This page lists the approved direction. Package files, lock files, wrappers, ima
 
 | Tool | Planned job | Status in this archive |
 | --- | --- | --- |
-| Java 21 | API runtime and domain code | Approved direction |
-| Spring Boot | HTTP, configuration, persistence integration, Actuator | Planned in `NFA-002` |
+| Java 21 | API runtime and domain code | Verified by the `NFA-002` build |
+| Spring Boot 4.1.1 | HTTP, configuration, persistence integration, Actuator | Verified API shell |
 | LangChain4j | AI Services, prompts, structured outputs, Ollama integration | Planned in `NFA-006` |
-| Maven Wrapper | Java build and pinned build entry | Planned in `NFA-002` |
+| Maven Wrapper 3.3.4 / Maven 3.9.16 | Java build and pinned build entry | Generated and verified in `NFA-002` |
 | Angular | task and workspace user interface | Planned in `NFA-003` |
 | TypeScript strict mode | web contracts and checks | Planned in `NFA-003` |
 | PostgreSQL | task, workspace, file, step, and artifact metadata | Planned in `NFA-004` |
@@ -34,11 +34,13 @@ A broad parser library may be used only if its dependency and security cost is r
 | --- | --- |
 | OpenAPI | typed backend contract and web client input |
 | Spring Problem Details | stable HTTP error format |
-| JUnit and AssertJ | Java tests |
-| ArchUnit | package boundary tests |
+| JUnit 6 and AssertJ | Java tests |
+| ArchUnit 1.5.0 | package boundary tests |
 | Testcontainers | PostgreSQL and runtime integration |
 | Playwright | end-to-end flows and privacy-safe screenshots |
-| formatter and lint plugins | stable Java and TypeScript source style |
+| Spotless 3.9.0 and google-java-format 1.36.0 | stable Java source style |
+
+The API build also pins Maven Compiler Plugin 3.15.0, Surefire 3.5.5, Enforcer 3.6.3, Site Plugin 3.22.0, JaCoCo 0.8.15, and Resources Plugin 3.5.0. These versions appear in `apps/api/pom.xml`, while the exact build proof is recorded in the release verification file.
 
 Do not install two tools for the same job without a measured reason.
 

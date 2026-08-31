@@ -1,8 +1,8 @@
 # Development rules
 
-## Planning state
+## Current state
 
-There is no runnable Java or Angular project in this archive. Commands below become valid only after their owning stories are implemented.
+The verified Spring Boot API shell and Maven Wrapper now exist under `apps/api`. The Angular project remains planned for `NFA-003`.
 
 ## Native tool ownership
 
@@ -14,7 +14,7 @@ root         Docker Compose and repository audit
 
 No story may hide all work behind one opaque wrapper command. The README may add a convenience command only after the native commands remain documented.
 
-## Planned Java rules
+## Java rules
 
 - Use Java 21 and the Maven Wrapper.
 - Use package-by-feature boundaries under `io.nookforge`.
@@ -29,7 +29,7 @@ No story may hide all work behind one opaque wrapper command. The README may add
 - Use Spring `ProblemDetail` for stable HTTP errors.
 - Use ArchUnit for dependency rules.
 
-Planned quality checks include formatting, compiler warnings, unit tests, integration tests, coverage reports, and Maven Enforcer rules. Exact plugins and versions are pinned by `NFA-002`.
+The `NFA-002` build pins Spring Boot 4.1.1, compiler 3.15.0, Surefire 3.5.5, Enforcer 3.6.3, Site 3.22.0, Spotless 3.9.0 with google-java-format 1.36.0, JaCoCo 0.8.15, Resources 3.5.0, ArchUnit 1.5.0, and Maven 3.9.16 as the Wrapper target. The build checks Java 21, plugin versions, dependency convergence, formatting, tests, architecture, and line coverage.
 
 ## Planned Angular rules
 
@@ -49,9 +49,9 @@ Planned quality checks include formatting, compiler warnings, unit tests, integr
 
 Exact Angular and test-runner versions are locked by `NFA-003` after supported tool checks.
 
-## Planned local development
+## Local development
 
-After Release 0.1:
+The verified API commands are:
 
 ```bash
 # API
@@ -60,7 +60,7 @@ cd apps/api
 ```
 
 ```bash
-# Web
+# Web after NFA-003
 cd apps/web
 npm ci
 npm start

@@ -4,7 +4,6 @@
 !.env.example
 
 # Java and Maven
-apps/api/.mvn/wrapper/maven-wrapper.jar
 apps/api/target/
 *.class
 *.log

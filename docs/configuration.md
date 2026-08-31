@@ -16,6 +16,18 @@ command-line override when documented
 
 Application services do not call `System.getenv` or parse `.env` files.
 
+## Current API shell setting
+
+`NFA-002` introduces one non-secret setting:
+
+| Property | Default | Rule |
+| --- | --- | --- |
+| `nookforge.api.public-base-url` | `http://127.0.0.1:8080` | absolute, hierarchical HTTP or HTTPS URI with a host |
+
+Invalid URI syntax, a non-HTTP scheme, an opaque URI, or a missing host fails configuration binding at startup. The system information response does not expose this setting.
+
+The API server binds to `127.0.0.1` by default through `server.address`.
+
 ## Local environment files
 
 ```bash
@@ -80,7 +92,7 @@ Model pull commands are documented only after the image and model contract pass 
 
 Supported local ports bind to `127.0.0.1` by default. A user may choose another bind address in `.env`, but the docs must explain the security effect.
 
-## Planned application properties
+## Planned application properties after the API shell
 
 | Property group | Job |
 | --- | --- |

@@ -2,7 +2,7 @@
 
 > **Turn local files into useful work.**
 
-![Planning baseline](https://img.shields.io/badge/status-planning%20baseline-6B7280?style=flat-square&labelColor=2B3137)
+![NFA-002 implemented](https://img.shields.io/badge/status-NFA--002%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square&labelColor=2B3137)](LICENSE)
 ![Local first](https://img.shields.io/badge/local--first-Ollama-2EA44F?style=flat-square&labelColor=2B3137)
 ![Java](https://img.shields.io/badge/Java-21-E76F00?style=flat-square&labelColor=2B3137&logo=openjdk&logoColor=white)
@@ -13,11 +13,13 @@
 
 Nook Forge AI is a local-first workspace for analyzing files and ZIP archives, comparing documents, extracting tasks, and generating structured plans, reports, and project documentation with Angular, Spring Boot, LangChain4j, Ollama, and Docker.
 
-## Archive status
+## Current status
 
-**This ZIP is a planning and governance baseline, not a runnable application.** It contains the approved architecture direction, release maps, 36 ordered stories, Codex roles, repository skills, configuration rules, ADRs, security rules, visual-documentation rules, and verification scripts. Delivery starts with the repository baseline in `NFA-001`, while runnable application code begins with `NFA-002` and must be implemented one story at a time.
+The repository baseline from `NFA-001` and the reviewed Spring Boot API shell from `NFA-002` are implemented. The API includes an official Maven Wrapper and verified local HTTP foundation, but it is not yet a product workflow; the archive also contains the approved architecture direction, release maps, 36 ordered stories, Codex roles, repository skills, configuration rules, ADRs, security rules, visual-documentation rules, and verification scripts.
 
-Product features remain planned until their owning stories are implemented and verified. No current document claims that Spring Boot, Angular, Docker Compose, Ollama, Langfuse, Prometheus, or Grafana already run in this archive.
+Beyond the verified API foundation, the product remains a planning and governance baseline, not a runnable application.
+
+Product features remain planned until their owning stories are implemented and verified. Angular, Docker Compose, Ollama, Langfuse, Prometheus, and Grafana do not run in the current repository state.
 
 The repository is maintained as a personal portfolio project. No external development workflow is defined at this stage.
 

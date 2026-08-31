@@ -15,7 +15,18 @@ python3 -m unittest discover \
 
 These checks need only Python 3 and do not install project dependencies.
 
-## Planned API test layers
+## NFA-002 API checks
+
+The API source includes focused context, configuration, brand-resource, HTTP-contract, safe-error, health-detail, and ArchUnit tests. They do not require Ollama, PostgreSQL, Docker Compose, or any other external service.
+
+The official Wrapper command passes on Java 21 without external services:
+
+```bash
+cd apps/api
+./mvnw verify
+```
+
+## API test layers
 
 | Layer | Purpose | Typical tool |
 | --- | --- | --- |

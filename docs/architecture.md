@@ -1,5 +1,20 @@
 # Architecture
 
+## Current backend shell
+
+`NFA-002` adds only the first verified Spring Boot shell. The live source packages are `bootstrap`, `shared.brand`, `shared.config`, `shared.error`, and `system.adapter.in.web`; no empty domain, application, persistence, file, or AI package exists yet.
+
+```mermaid
+flowchart TB
+    BOOT[Spring Boot bootstrap] --> CONFIG[Validated API configuration]
+    BOOT --> BRAND[Canonical brand resource]
+    HTTP[System HTTP adapter] --> BRAND
+    HTTP --> BUILD[Generated build properties]
+    ERRORS[Problem Detail advice] --> HTTP
+```
+
+The system controller maps immutable response records directly because this shell has no use-case orchestration. Later feature controllers must follow the full dependency direction below.
+
 ## Target state through Release 0.5
 
 Nook Forge is one local web application with a modular Spring Boot backend, Angular frontend, PostgreSQL state, local file volumes, and a configured Ollama endpoint. Optional observability stays outside the core request path.

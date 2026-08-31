@@ -35,4 +35,4 @@ This directory is the source of truth for the planned product, architecture, del
 - [Detailed future option notes](future/README.md)
 - [Planning scope](planning-scope.md)
 
-The planning archive contains no runnable product. Release documentation must change from planned claims to tested instructions only after the owning stories pass.
+The repository contains the verified runnable API shell from `NFA-002`, but no runnable product workflow yet. Release documentation changes from planned claims to tested instructions only after each owning story passes.
