@@ -2,7 +2,7 @@
 
 ## Current state
 
-The verified Spring Boot API, Maven Wrapper, PostgreSQL profiles, Flyway migration, and persistence adapter exist under `apps/api`. The verified Angular shell, npm lock, Vitest checks, lint rules, and token flow exist under `apps/web`.
+The verified Spring Boot API, Maven Wrapper, PostgreSQL profiles, Flyway migration, persistence adapter, and runtime image exist under `apps/api`. The verified Angular shell, npm lock, checks, token flow, and static runtime image exist under `apps/web`; root Compose supports existing and managed Ollama endpoints.
 
 ## Native tool ownership
 
@@ -57,7 +57,21 @@ The V1 migration owns only installation metadata. Task, workspace, source-file, 
 
 ## Local development
 
-Until `NFA-005` adds Compose, start an existing PostgreSQL instance or a development-only container:
+For the supported container runtime, copy the environment file and choose one Ollama mode:
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+```bash
+docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.ollama.yml \
+  up --build
+```
+
+For native API development, start an existing PostgreSQL instance or a development-only container:
 
 ```bash
 docker run --rm --name nookforge-postgres-dev \
@@ -83,7 +97,7 @@ npm ci
 npm start
 ```
 
-The current web shell makes no product API request. Ollama, a same-origin API connection, and task events stay planned for their owning stories.
+The current web shell makes no product API request. The Ollama client and model call start in `NFA-006`; a same-origin API connection and task events stay planned for their owning stories.
 
 ## Branch and story scope
 

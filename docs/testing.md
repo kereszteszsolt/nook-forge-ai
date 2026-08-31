@@ -65,7 +65,7 @@ cd apps/api && ./mvnw verify
 cd apps/web && npm ci && npm run lint && npm test -- --run && npm run build
 ```
 
-After `NFA-005`:
+Current Compose checks:
 
 ```bash
 docker compose config
@@ -83,7 +83,7 @@ docker compose \
   config
 ```
 
-Exact scripts may change during implementation, but every supported path must remain explicit.
+Runtime verification also starts each configuration in an isolated Compose project, checks health and loopback ports, and removes only run-owned resources. `NFA-006` adds the real-model smoke path; NFA-005 verifies endpoint routing without downloading a model.
 
 ## Release test matrix
 

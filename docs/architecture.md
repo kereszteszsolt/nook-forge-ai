@@ -2,11 +2,11 @@
 
 ## Current backend foundation
 
-`NFA-002` adds the verified Spring Boot shell, and `NFA-004` adds the PostgreSQL foundation. The live system feature now has one small domain value, one outbound port, and a JPA persistence adapter for installation metadata; task, workspace, file, artifact, and AI packages remain absent.
+`NFA-002` adds the verified Spring Boot shell, `NFA-004` adds the PostgreSQL foundation, and `NFA-005` adds the two container deployment modes and validated Ollama settings. The live system feature now has one small domain value, one outbound port, and a JPA persistence adapter for installation metadata; task, workspace, file, artifact, and AI adapter packages remain absent.
 
 ```mermaid
 flowchart TB
-    BOOT[Spring Boot bootstrap] --> CONFIG[Validated API and database configuration]
+    BOOT[Spring Boot bootstrap] --> CONFIG[Validated API, database, and Ollama configuration]
     BOOT --> BRAND[Canonical brand resource]
     HTTP[System HTTP adapter] --> BRAND
     HTTP --> BUILD[Generated build properties]
@@ -41,7 +41,7 @@ flowchart TB
 
 ## Deployment shape
 
-The base Compose stack is planned to start:
+The base Compose stack starts:
 
 ```text
 web
@@ -49,12 +49,14 @@ api
 postgres
 ```
 
-It connects to an existing Ollama endpoint. The optional Ollama override adds:
+It receives an existing Ollama endpoint through `OLLAMA_BASE_URL`. The optional Ollama override adds:
 
 ```text
 ollama
 ollama model volume
 ```
+
+The managed API waits for Ollama health and uses `http://ollama:11434`; the base API does not make an external endpoint part of Compose health. Both modes use the same application source and keep host ports on loopback by default.
 
 Release 0.5 adds an independent optional observability override. Core services must not depend on the monitoring services to start or finish a task.
 

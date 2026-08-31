@@ -26,11 +26,12 @@ This archive prepares the `nook-forge-ai` repository for story-driven implementa
 - the repository and story-governance baseline from `NFA-001`;
 - the Java 21 and Spring Boot API shell from `NFA-002`;
 - the Angular shell and repository design-token flow from `NFA-003`;
-- PostgreSQL profiles, Flyway V1 schema history, and the installation metadata adapter from `NFA-004`.
+- PostgreSQL profiles, Flyway V1 schema history, and the installation metadata adapter from `NFA-004`;
+- the base Docker Compose stack and optional managed Ollama mode from `NFA-005`.
 
 ## Not included
 
-No Docker Compose service, LangChain4j adapter, Ollama call, task or workspace schema, file parser, ZIP extractor, Langfuse service, Prometheus config, Grafana dashboard, product screenshot, or application MCP code is implemented.
+No LangChain4j adapter, Ollama model call, task or workspace schema, file parser, ZIP extractor, Langfuse service, Prometheus config, Grafana dashboard, product screenshot, or application MCP code is implemented.
 
 Plan, implementation, commit, push, and next-story approvals remain separate.
 

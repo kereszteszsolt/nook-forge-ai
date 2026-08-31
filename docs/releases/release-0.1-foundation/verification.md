@@ -2,7 +2,7 @@
 
 ## Status
 
-In progress. `NFA-001` through `NFA-004` are implemented, while the remaining Release 0.1 stories stay planned.
+In progress. `NFA-001` through `NFA-005` are implemented, while the remaining Release 0.1 stories stay planned.
 
 ## Story evidence
 
@@ -12,7 +12,7 @@ In progress. `NFA-001` through `NFA-004` are implemented, while the remaining Re
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
 | [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `21f48fa` | Implemented |
 | [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `f52e59e` | Implemented |
-| [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
+| [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Pending | Pending | Implemented |
 | [`NFA-006`](stories/NFA-006-add-the-first-structured-ai-task.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-007`](stories/NFA-007-join-the-first-full-stack-path-and-publish-guides.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 
@@ -112,6 +112,53 @@ The PostgreSQL image was `postgres:18.6-bookworm` at `postgres@sha256:1c59e2c3c8
 Docker Desktop could not expose the Ryuk callback port to the nested Maven build container. The successful verification therefore used `TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal`, disabled Ryuk for that build container only, and relied on the test's scoped `try` cleanup; a post-run Docker query confirmed that no Testcontainers resource remained. The expected database-down health probe logged a safe connection failure, and the existing non-failing Mockito dynamic-agent and Surefire dumpstream warnings remained.
 
 The first read-only review found two low-severity documentation issues: the current-state adapter-to-port arrow was reversed, and the verification record omitted the exact nested-Docker commands. Both were fixed, `git diff --check` stayed clean, and the focused re-review found no remaining issue.
+
+## NFA-005 focused checks
+
+The maintainer approved the plan and implementation separately on 2026-08-31. NFA-005 adds only the two Docker deployment modes, runtime images, and validated Ollama settings; the LangChain4j client, first model call, and joined browser flow remain in `NFA-006` and `NFA-007`.
+
+Acceptance criteria were checked in their listed order:
+
+1. Resolved base configuration contained exactly `postgres`, `api`, and `web`; an isolated `nfa005-base-proof` stack made all three healthy and passed the configured external endpoint to the API.
+2. Base configuration contained no Ollama service or model volume; an API-container request reached an independent Ollama fixture through `host.docker.internal` and returned HTTP 200 from `/api/version`.
+3. The managed merge added exactly one official `ollama/ollama:0.32.14` service and one `ollama-models` volume mounted at `/root/.ollama`; `ollama list` stayed empty.
+4. Resolved defaults mapped `127.0.0.1:11435` to `11434` and set the API endpoint to `http://ollama:11434`; the live test used non-conflicting port `21435` and returned version `0.32.14`.
+5. Resolved web, API, PostgreSQL, and managed Ollama host ports used `127.0.0.1`; the API resolved `host.docker.internal=host-gateway` on Linux.
+6. `.env.example` lists the current bind, port, database, and Ollama-only AI variables plus disabled audit-required Langfuse placeholders; `.env` and `.env.*` remain ignored and excluded from Docker build context.
+7. Both Compose merges passed validation; PostgreSQL, API, web, and managed Ollama used focused healthchecks, while `depends_on` waited only for stack-owned services.
+8. API and web filesystem scans found no `ollama`, `.ollama`, `.env`, or `.env.*`; image config and history contained no cloud provider, model, password, or API key, and the API ran as numeric non-root user `10001:10001`.
+
+The primary isolated runtime commands were:
+
+```bash
+POSTGRES_PASSWORD=nfa005-validation-only \
+OLLAMA_BASE_URL=http://host.docker.internal:21434 \
+WEB_PORT=14200 API_PORT=18080 POSTGRES_PORT=15433 \
+docker compose -p nfa005-base-proof \
+  up --detach --wait --wait-timeout 180 --build
+
+POSTGRES_PASSWORD=nfa005-validation-only \
+WEB_PORT=24200 API_PORT=28080 POSTGRES_PORT=25433 \
+OLLAMA_CONTAINER_PORT=21435 \
+docker compose -p nfa005-managed-proof \
+  -f docker-compose.yml \
+  -f docker-compose.ollama.yml \
+  up --detach --wait --wait-timeout 180 --build
+```
+
+The managed Ollama volume retained a synthetic marker after an Ollama container recreate, while its model list remained empty. Both test projects were removed with their containers, networks, and volumes; the independent `--rm` Ollama fixture and isolated npm dependency volume were also removed, and no Testcontainers container remained.
+
+The final Java command ran Maven 3.9.16 on Java 21.0.12 and completed `clean verify` with 34 tests, 0 failures, 0 errors, and 0 skipped. Spotless kept 24 Java files clean, all 9 ArchUnit rules passed, and JaCoCo covered 126 of 130 lines, or 96.92%, with 36 of 52 branches covered.
+
+The web command used `node:24.20.0-bookworm-slim` with an isolated `nfa005-web-node-modules` volume. Lint passed; Vitest passed 2 files and 6 tests; token and brand drift checks passed; and the production build emitted a 230.44 kB initial bundle.
+
+Both `docker compose ... config --quiet` commands passed. The repository audit passed with 3 agents, 6 skills, 36 stories, and valid local links; all 6 audit unit tests and `git diff --check` passed.
+
+Docker 29.6.1 and Compose 5.3.0 ran the proof. Registry digests were recorded for Ollama `sha256:9d30908e41144b1f1da89b9d8e33c07e4aeb43ff41a8660241b1686e2cc330ad`, Node `sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e`, Maven `sha256:8f6ac126f7810bb5549c4cd122d2bf0e9cda5bdeb0838aa928f09e779fd8bef8`, and PostgreSQL `sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af`. The builds resolved Temurin at `sha256:96975602e131485862eb8cd32927face8a06d7591a5e865944b634a701d9df72` and Nginx at `sha256:ddde39c6e51f02fde7410c2e9c234cf2d0a4c7bdbbe176aeb37d8ad7ab4eb58c`.
+
+The first Docker build exposed the Maven image's `MAVEN_CONFIG` collision with the generated Wrapper; the Dockerfile now scopes that variable to empty for the Wrapper invocation, and the repeat build passed. The first full Java run passed all tests but stopped on two Spotless line wraps; the corrected final run passed. npm repeated the known non-failing warning about four transitive install scripts, and the database-down test emitted its expected safe health warning.
+
+The first read-only review found no technical defect and requested two documentation consistency fixes: align the story and release evidence with the implemented state, and mark the Ollama environment contract current while keeping provider calls in `NFA-006`. Both fixes were applied, and the focused re-review found no remaining issue.
 
 ## Release-wide checks
 

@@ -2,24 +2,26 @@
 
 > **Turn local files into useful work.**
 
-![NFA-004 implemented](https://img.shields.io/badge/status-NFA--004%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
+![NFA-005 implemented](https://img.shields.io/badge/status-NFA--005%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square&labelColor=2B3137)](LICENSE)
 ![Local first](https://img.shields.io/badge/local--first-Ollama-2EA44F?style=flat-square&labelColor=2B3137)
 ![Java](https://img.shields.io/badge/Java-21-E76F00?style=flat-square&labelColor=2B3137&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-6DB33F?style=flat-square&labelColor=2B3137&logo=springboot&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-22.1.4-DD0031?style=flat-square&labelColor=2B3137&logo=angular&logoColor=white)
 ![LangChain4j](https://img.shields.io/badge/LangChain4j-planned-8B5CF6?style=flat-square&labelColor=2B3137)
-![Docker Compose](https://img.shields.io/badge/Docker%20Compose-planned-2496ED?style=flat-square&labelColor=2B3137&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker%20Compose-verified-2496ED?style=flat-square&labelColor=2B3137&logo=docker&logoColor=white)
 
 Nook Forge AI is a local-first workspace for analyzing files and ZIP archives, comparing documents, extracting tasks, and generating structured plans, reports, and project documentation with Angular, Spring Boot, LangChain4j, Ollama, and Docker.
 
 ## Current status
 
-The repository baseline from `NFA-001`, the reviewed Spring Boot API shell from `NFA-002`, the Angular shell from `NFA-003`, and the PostgreSQL and Flyway foundation from `NFA-004` are implemented. The API has validated local and container database profiles, a forward-only foundation migration, and database-aware readiness; the web app has strict route boundaries, repository tokens, empty states, and an explicit unavailable-API state.
+The repository baseline through `NFA-004` and both Docker deployment modes from `NFA-005` are implemented. The API has validated database and Ollama-only settings, a forward-only foundation migration, and database-aware readiness; the web app has strict route boundaries, repository tokens, empty states, and an explicit unavailable-API state.
 
-The shells and database foundation build and test independently, but together they remain a planning and governance baseline, not a runnable application or joined product workflow.
+Docker Compose now runs the web shell, API shell, and PostgreSQL with either an existing Ollama endpoint or one managed Ollama service. The first AI call and joined product workflow remain planned for `NFA-006` and `NFA-007`.
 
-Product features remain planned until their owning stories are implemented and verified. Docker Compose, Ollama, Langfuse, Prometheus, and Grafana do not run in the current repository state.
+The repository remains a planning and governance baseline for product behavior: the deployment shells run, but this is not a runnable application workflow yet.
+
+Product features remain planned until their owning stories are implemented and verified. Langfuse, Prometheus, and Grafana do not run in the current repository state.
 
 The repository is maintained as a personal portfolio project. No external development workflow is defined at this stage.
 
@@ -73,9 +75,7 @@ The backend is one modular Spring Boot monolith. The frontend is one Angular app
 
 See the [architecture](docs/architecture.md), [monorepo decision](docs/monorepo.md), and [AI provider boundary](docs/ai-provider-boundary.md).
 
-## Planned Ollama modes
-
-`NFA-005` will support both modes below. These commands become supported only after that story is implemented and tested.
+## Supported Ollama modes
 
 ### Option A: use an existing Ollama endpoint
 
@@ -86,7 +86,7 @@ cp .env.example .env
 docker compose up --build
 ```
 
-The planned default is:
+The default is:
 
 ```env
 OLLAMA_BASE_URL=http://host.docker.internal:11434
@@ -102,7 +102,7 @@ docker compose \
   up --build
 ```
 
-The dedicated service will keep models in its own named volume and expose `11435` on the host by default. Ollama will not be installed inside the API or web image.
+The dedicated service keeps models in its own named volume and exposes `11435` on the host by default. It starts with no model and never pulls one automatically; Ollama is not installed inside the API or web image.
 
 See [configuration and Ollama modes](docs/configuration.md).
 

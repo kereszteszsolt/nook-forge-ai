@@ -15,8 +15,10 @@ This page lists the approved direction. Package files, lock files, wrappers, ima
 | PostgreSQL 18.6 | durable foundation metadata | Verified by the `NFA-004` lifecycle test |
 | Flyway 12.4.0 | schema history and forward-only migrations | Verified by `NFA-004` |
 | PostgreSQL JDBC 42.7.13 | API database connection | Managed by Spring Boot 4.1.1 and verified by `NFA-004` |
-| Ollama | default and only model provider through 0.5 | Planned in `NFA-005` and `NFA-006` |
-| Docker Compose | supported local runtime | Planned in `NFA-005` |
+| Ollama 0.32.14 image | default and only model provider through 0.5 | Deployment verified by `NFA-005`; model use starts in `NFA-006` |
+| Docker Compose 5.3.0 | supported local runtime | Both modes verified by `NFA-005` |
+| Eclipse Temurin 21.0.12+8 JRE | API container runtime | Verified by `NFA-005` |
+| Nginx 1.30.4 Alpine slim | static web container runtime | Verified by `NFA-005` |
 
 ## File and document work
 

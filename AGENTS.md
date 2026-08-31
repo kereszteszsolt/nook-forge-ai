@@ -8,7 +8,7 @@ The core path is small: add files, choose a task, watch clear steps, inspect a s
 
 ## Planning state
 
-This repository contains the verified API shell from `NFA-002`, Angular shell from `NFA-003`, and PostgreSQL and Flyway foundation from `NFA-004`. It does not yet contain a Compose stack, AI feature, joined API flow, or runnable product workflow.
+This repository contains the verified API shell from `NFA-002`, Angular shell from `NFA-003`, PostgreSQL and Flyway foundation from `NFA-004`, and both Docker/Ollama deployment modes from `NFA-005`. It does not yet contain an AI feature, joined API flow, or runnable product workflow.
 
 A plan is not implemented behavior. Do not write docs, badges, examples, or release notes that claim a command or feature works before its story is implemented and verified.
 

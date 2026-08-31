@@ -28,6 +28,19 @@ Invalid URI syntax, a non-HTTP scheme, an opaque URI, or a missing host fails co
 
 The API server binds to `127.0.0.1` by default through `server.address`.
 
+### Ollama-only AI settings
+
+`NFA-005` adds validated settings under `nookforge.ai` without adding a provider client or model call:
+
+| Property | Environment variable | Default | Rule |
+| --- | --- | --- | --- |
+| `provider` | `AI_PROVIDER` | `ollama` | only `ollama` |
+| `base-url` | `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | absolute HTTP or HTTPS URI with a host and no credentials, query, or fragment |
+| `model` | `OLLAMA_MODEL` | `llama3.1:8b` | nonblank |
+| `request-timeout` | `OLLAMA_REQUEST_TIMEOUT` | `120s` | positive duration |
+
+`NFA-006` owns the LangChain4j adapter, configured chat model, and first real model request.
+
 ### PostgreSQL
 
 `NFA-004` adds validated settings under `nookforge.database`:
@@ -58,9 +71,11 @@ Rules:
 - production-like secrets come from the runtime environment or a later approved secret store.
 - logs and error payloads never print passwords or API keys.
 
+Current Compose variables are `COMPOSE_PROJECT_NAME`, `BIND_ADDRESS`, `WEB_PORT`, `API_PORT`, `POSTGRES_PORT`, `OLLAMA_CONTAINER_PORT`, the three `POSTGRES_*` values, and the four Ollama-only AI values above. The file also retains empty or disabled Langfuse audit placeholders; their runtime integration and full service variables remain owned by Release 0.5.
+
 ## Option A: existing Ollama endpoint
 
-After `NFA-005`, base Compose starts the web, API, and PostgreSQL services. The API connects to `OLLAMA_BASE_URL`.
+Base Compose starts the web, API, and PostgreSQL services. It passes `OLLAMA_BASE_URL` to the API container and adds the host-gateway route needed for a native endpoint.
 
 Examples:
 
@@ -70,7 +85,7 @@ OLLAMA_BASE_URL=http://host.docker.internal:11434
 ```
 
 ```env
-# Ollama in another reachable container or network
+# Ollama at a container name reachable from the API network
 OLLAMA_BASE_URL=http://ollama:11434
 ```
 
@@ -79,9 +94,9 @@ OLLAMA_BASE_URL=http://ollama:11434
 OLLAMA_BASE_URL=http://192.168.1.20:11434
 ```
 
-The base Compose file must add the Linux host-gateway mapping needed for `host.docker.internal`. A remote endpoint remains the user's responsibility and should be protected by their network rules.
+The base Compose file adds the Linux host-gateway mapping needed for `host.docker.internal`. Another container must share a reachable network or expose a host-accessible address; a remote endpoint remains the user's responsibility and should be protected by their network rules.
 
-Planned command:
+Command:
 
 ```bash
 docker compose up --build
@@ -91,7 +106,7 @@ docker compose up --build
 
 The optional override adds the official Ollama service, a dedicated model volume, and a host port that does not collide with a native instance.
 
-Planned command:
+Command:
 
 ```bash
 docker compose \
@@ -102,17 +117,17 @@ docker compose \
 
 The API uses the internal service URL `http://ollama:11434`. The host uses `http://localhost:11435` by default.
 
-Model pull commands are documented only after the image and model contract pass in `NFA-005` and `NFA-006`.
+The service starts with an empty model volume and never pulls a model automatically. `NFA-006` will document the selected model and explicit pull step after the real-model contract passes.
 
 ## Loopback defaults
 
-Supported local ports bind to `127.0.0.1` by default. A user may choose another bind address in `.env`, but the docs must explain the security effect.
+`BIND_ADDRESS=127.0.0.1` keeps the web, API, PostgreSQL, and managed Ollama host ports on loopback by default. Changing it to `0.0.0.0` or another interface exposes an account-free local application to that network and requires user-managed firewall and endpoint protection.
 
-## Planned application properties after the API shell
+## Current and planned application properties
 
 | Property group | Job |
 | --- | --- |
-| `nookforge.ai` | provider, model, endpoint, timeout, schema repair limit |
+| `nookforge.ai` | implemented provider, model, endpoint, and timeout; schema repair remains planned |
 | `nookforge.storage` | workspace root, artifact root, cleanup rules |
 | `nookforge.upload` | request and file limits |
 | `nookforge.archive` | entry, expansion, path, and depth limits |

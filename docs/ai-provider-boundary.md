@@ -56,7 +56,7 @@ The app must not concatenate every file into one unbounded prompt. When the sele
 
 ## Model configuration
 
-Planned environment contract:
+Current configuration contract:
 
 ```env
 AI_PROVIDER=ollama
@@ -66,6 +66,8 @@ OLLAMA_REQUEST_TIMEOUT=120s
 ```
 
 `AI_PROVIDER` accepts only `ollama` until a later approved provider story exists. An invalid value stops startup with a clear configuration error.
+
+`NFA-006` still owns the LangChain4j client, configured chat model, and first model request.
 
 ## Real-model proof
 
