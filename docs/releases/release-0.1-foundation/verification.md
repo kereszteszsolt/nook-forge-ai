@@ -11,7 +11,7 @@ In progress. `NFA-001` through `NFA-004` are implemented, while the remaining Re
 | [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
 | [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `21f48fa` | Implemented |
-| [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Pending | Pending | Implemented |
+| [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `f52e59e` | Implemented |
 | [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-006`](stories/NFA-006-add-the-first-structured-ai-task.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-007`](stories/NFA-007-join-the-first-full-stack-path-and-publish-guides.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -72,7 +72,7 @@ A read-only review found missing explicit strict compiler switches, a hidden boo
 
 ## NFA-004 focused checks
 
-The maintainer approved the plan and implementation separately on 2026-08-31. The implementation adds the PostgreSQL and Flyway foundation only; Compose, task, workspace, source-file, step, and artifact schemas remain outside this story.
+The maintainer approved the plan, implementation, and commit separately on 2026-08-31. Implementation commit `f52e59e` adds the PostgreSQL and Flyway foundation only; Compose, task, workspace, source-file, step, and artifact schemas remain outside this story.
 
 Acceptance criteria were checked in their listed order:
 
