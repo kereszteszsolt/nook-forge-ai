@@ -15,9 +15,9 @@ Nook Forge AI is a local-first workspace for analyzing files and ZIP archives, c
 
 ## Archive status
 
-**This ZIP is a planning and governance baseline, not a runnable application.** It contains the approved architecture direction, release maps, 36 ordered stories, Codex roles, repository skills, configuration rules, ADRs, security rules, visual-documentation rules, and verification scripts. Application code starts with `NFA-001` and must be implemented one story at a time.
+**This ZIP is a planning and governance baseline, not a runnable application.** It contains the approved architecture direction, release maps, 36 ordered stories, Codex roles, repository skills, configuration rules, ADRs, security rules, visual-documentation rules, and verification scripts. Delivery starts with the repository baseline in `NFA-001`, while runnable application code begins with `NFA-002` and must be implemented one story at a time.
 
-No current document claims that Spring Boot, Angular, Docker Compose, Ollama, Langfuse, Prometheus, or Grafana already run in this archive.
+Product features remain planned until their owning stories are implemented and verified. No current document claims that Spring Boot, Angular, Docker Compose, Ollama, Langfuse, Prometheus, or Grafana already run in this archive.
 
 The repository is maintained as a personal portfolio project. No external development workflow is defined at this stage.
 
