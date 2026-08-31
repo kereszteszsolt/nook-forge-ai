@@ -71,6 +71,16 @@ class ArchitectureTest {
           .allowEmptyShould(true);
 
   @ArchTest
+  static final ArchRule persistence_implementations_stay_behind_the_outbound_adapter =
+      noClasses()
+          .that()
+          .resideOutsideOfPackage("..adapter.out.persistence..")
+          .should()
+          .dependOnClassesThat()
+          .resideInAPackage("..adapter.out.persistence..")
+          .allowEmptyShould(true);
+
+  @ArchTest
   static final ArchRule ai_dependencies_stay_in_ai_adapters_or_configuration =
       noClasses()
           .that()

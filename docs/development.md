@@ -2,7 +2,7 @@
 
 ## Current state
 
-The verified Spring Boot API shell and Maven Wrapper exist under `apps/api`. The verified Angular shell, npm lock, Vitest checks, lint rules, and token flow exist under `apps/web`.
+The verified Spring Boot API, Maven Wrapper, PostgreSQL profiles, Flyway migration, and persistence adapter exist under `apps/api`. The verified Angular shell, npm lock, Vitest checks, lint rules, and token flow exist under `apps/web`.
 
 ## Native tool ownership
 
@@ -31,6 +31,12 @@ No story may hide all work behind one opaque wrapper command. The README may add
 
 The `NFA-002` build pins Spring Boot 4.1.1, compiler 3.15.0, Surefire 3.5.5, Enforcer 3.6.3, Site 3.22.0, Spotless 3.9.0 with google-java-format 1.36.0, JaCoCo 0.8.15, Resources 3.5.0, ArchUnit 1.5.0, and Maven 3.9.16 as the Wrapper target. The build checks Java 21, plugin versions, dependency convergence, formatting, tests, architecture, and line coverage.
 
+## Database migrations
+
+Add every later schema change as a new `V<n>__short_description.sql` file under `apps/api/src/main/resources/db/migration`. Never edit or rename a migration that has run against a retained database. Flyway clean stays disabled in application runtime; fix a faulty released schema with a new forward-only migration.
+
+The V1 migration owns only installation metadata. Task, workspace, source-file, step, and artifact tables remain out of scope until their stories.
+
 ## Angular rules
 
 - Use the Angular CLI and strict TypeScript.
@@ -51,12 +57,23 @@ The `NFA-002` build pins Spring Boot 4.1.1, compiler 3.15.0, Surefire 3.5.5, Enf
 
 ## Local development
 
-The verified API commands are:
+Until `NFA-005` adds Compose, start an existing PostgreSQL instance or a development-only container:
 
 ```bash
-# API
+docker run --rm --name nookforge-postgres-dev \
+  -p 127.0.0.1:5433:5432 \
+  -e POSTGRES_DB=nookforge \
+  -e POSTGRES_USER=nookforge \
+  -e POSTGRES_PASSWORD=nookforge-local-only \
+  -v nookforge-postgres-dev:/var/lib/postgresql \
+  postgres:18.6-bookworm
+```
+
+Then run the API in another shell:
+
+```bash
 cd apps/api
-./mvnw spring-boot:run
+POSTGRES_PASSWORD=nookforge-local-only ./mvnw spring-boot:run
 ```
 
 ```bash
@@ -66,7 +83,7 @@ npm ci
 npm start
 ```
 
-The current shell makes no product API request. PostgreSQL, Ollama, a same-origin API connection, and task events stay planned for their owning stories.
+The current web shell makes no product API request. Ollama, a same-origin API connection, and task events stay planned for their owning stories.
 
 ## Branch and story scope
 

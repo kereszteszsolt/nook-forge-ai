@@ -21,11 +21,18 @@ This archive prepares the `nook-forge-ai` repository for story-driven implementa
 - repository audit, comment audit, and tests;
 - architecture decisions and documentation templates.
 
+## Implemented foundation
+
+- the repository and story-governance baseline from `NFA-001`;
+- the Java 21 and Spring Boot API shell from `NFA-002`;
+- the Angular shell and repository design-token flow from `NFA-003`;
+- PostgreSQL profiles, Flyway V1 schema history, and the installation metadata adapter from `NFA-004`.
+
 ## Not included
 
-No Spring Boot source, Angular source, Maven build, npm build, Flyway migration, Docker Compose service, LangChain4j adapter, Ollama call, database schema, file parser, ZIP extractor, Langfuse service, Prometheus config, Grafana dashboard, product screenshot, or application MCP code is implemented.
+No Docker Compose service, LangChain4j adapter, Ollama call, task or workspace schema, file parser, ZIP extractor, Langfuse service, Prometheus config, Grafana dashboard, product screenshot, or application MCP code is implemented.
 
-No Git commit is included. Plan, implementation, commit, push, and next-story approvals remain separate.
+Plan, implementation, commit, push, and next-story approvals remain separate.
 
 ## Future labels
 

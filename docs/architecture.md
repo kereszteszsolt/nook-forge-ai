@@ -1,19 +1,22 @@
 # Architecture
 
-## Current backend shell
+## Current backend foundation
 
-`NFA-002` adds only the first verified Spring Boot shell. The live source packages are `bootstrap`, `shared.brand`, `shared.config`, `shared.error`, and `system.adapter.in.web`; no empty domain, application, persistence, file, or AI package exists yet.
+`NFA-002` adds the verified Spring Boot shell, and `NFA-004` adds the PostgreSQL foundation. The live system feature now has one small domain value, one outbound port, and a JPA persistence adapter for installation metadata; task, workspace, file, artifact, and AI packages remain absent.
 
 ```mermaid
 flowchart TB
-    BOOT[Spring Boot bootstrap] --> CONFIG[Validated API configuration]
+    BOOT[Spring Boot bootstrap] --> CONFIG[Validated API and database configuration]
     BOOT --> BRAND[Canonical brand resource]
     HTTP[System HTTP adapter] --> BRAND
     HTTP --> BUILD[Generated build properties]
     ERRORS[Problem Detail advice] --> HTTP
+    PERSIST[System persistence adapter] -. implements .-> STORE[Installation metadata port]
+    PERSIST --> DB[(PostgreSQL)]
+    FLYWAY[Flyway V1] --> DB
 ```
 
-The system controller maps immutable response records directly because this shell has no use-case orchestration. Later feature controllers must follow the full dependency direction below.
+The system controller maps immutable response records directly because this foundation has no use-case orchestration. Persistence entities and Spring Data repositories remain package-private inside the outbound adapter. Later feature controllers must follow the full dependency direction below.
 
 ## Target state through Release 0.5
 

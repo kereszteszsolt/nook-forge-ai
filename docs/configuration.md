@@ -16,7 +16,7 @@ command-line override when documented
 
 Application services do not call `System.getenv` or parse `.env` files.
 
-## Current API shell setting
+## Current API settings
 
 `NFA-002` introduces one non-secret setting:
 
@@ -27,6 +27,22 @@ Application services do not call `System.getenv` or parse `.env` files.
 Invalid URI syntax, a non-HTTP scheme, an opaque URI, or a missing host fails configuration binding at startup. The system information response does not expose this setting.
 
 The API server binds to `127.0.0.1` by default through `server.address`.
+
+### PostgreSQL
+
+`NFA-004` adds validated settings under `nookforge.database`:
+
+| Property | Local default | Container default | Rule |
+| --- | --- | --- | --- |
+| `host` | `127.0.0.1` | `postgres` | hostname characters only |
+| `port` | `5433` | `5432` | 1 through 65535 |
+| `name` | `nookforge` | `nookforge` | letters, digits, and underscores |
+| `username` | `nookforge` | `nookforge` | letters, digits, and underscores |
+| `password` | none | none | required and nonblank |
+
+The profiles map these values from `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, and `POSTGRES_PASSWORD`. The application builds the JDBC URL after validation, and no checked application property supplies a password default.
+
+Flyway runs the checked `db/migration` files before JPA validation. Hibernate does not create or update tables, Spring SQL initialization is disabled, and Flyway clean is disabled.
 
 ## Local environment files
 
@@ -122,11 +138,11 @@ The full self-hosted Langfuse service variables are added only in `NFA-033` afte
 
 ## Profiles
 
-Planned profiles:
-
 - `local`: host development with local dependencies;
 - `container`: Docker Compose service names and paths;
-- `test`: test-only ports and temporary storage.
+- `test`: reserved for test-only ports and temporary file storage in later stories.
+
+The implemented PostgreSQL lifecycle test supplies fresh Testcontainers coordinates to the local and container profiles rather than storing test credentials in a profile file.
 
 Do not create one profile per developer or commit a personal profile.
 

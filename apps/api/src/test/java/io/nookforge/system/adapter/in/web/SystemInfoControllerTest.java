@@ -9,14 +9,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import io.nookforge.bootstrap.NookForgeApplication;
+import io.nookforge.shared.brand.BrandConfiguration;
+import java.util.Properties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(classes = NookForgeApplication.class)
-@AutoConfigureMockMvc
+@WebMvcTest(SystemInfoController.class)
+@Import({BrandConfiguration.class, SystemInfoControllerTest.BuildConfiguration.class})
+@ContextConfiguration(classes = NookForgeApplication.class)
 class SystemInfoControllerTest {
 
   private final MockMvc mockMvc;
@@ -43,23 +50,17 @@ class SystemInfoControllerTest {
         .andExpect(jsonPath("$.build.time").doesNotExist());
   }
 
-  @Test
-  void exposesLivenessWithoutComponentsOrDetails() throws Exception {
-    mockMvc
-        .perform(get("/actuator/health/liveness"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.status").value("UP"))
-        .andExpect(jsonPath("$.components").doesNotExist())
-        .andExpect(jsonPath("$.details").doesNotExist());
-  }
+  @TestConfiguration(proxyBeanMethods = false)
+  static class BuildConfiguration {
 
-  @Test
-  void exposesReadinessWithoutComponentsOrDetails() throws Exception {
-    mockMvc
-        .perform(get("/actuator/health/readiness"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.status").value("UP"))
-        .andExpect(jsonPath("$.components").doesNotExist())
-        .andExpect(jsonPath("$.details").doesNotExist());
+    @Bean
+    BuildProperties buildProperties() {
+      var properties = new Properties();
+      properties.setProperty("group", "io.nookforge");
+      properties.setProperty("artifact", "nook-forge-api");
+      properties.setProperty("name", "Nook Forge API");
+      properties.setProperty("version", "0.1.0-SNAPSHOT");
+      return new BuildProperties(properties);
+    }
   }
 }

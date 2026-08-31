@@ -2,7 +2,7 @@
 
 ## Status
 
-In progress. `NFA-001` through `NFA-003` are implemented, while the remaining Release 0.1 stories stay planned.
+In progress. `NFA-001` through `NFA-004` are implemented, while the remaining Release 0.1 stories stay planned.
 
 ## Story evidence
 
@@ -11,7 +11,7 @@ In progress. `NFA-001` through `NFA-003` are implemented, while the remaining Re
 | [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
 | [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `21f48fa` | Implemented |
-| [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
+| [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Pending | Pending | Implemented |
 | [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-006`](stories/NFA-006-add-the-first-structured-ai-task.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-007`](stories/NFA-007-join-the-first-full-stack-path-and-publish-guides.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -69,6 +69,49 @@ The web checks used `node:24.20.0-bookworm-slim`, resolved at manifest digest `s
 `npm ci` emitted a non-failing npm 11 notice for four transitive packages whose install scripts are not covered by an explicit allow list. Lint, tests, drift checks, production compilation, and dependency-tree validation still exited successfully; no host Node installation was used, and the run-owned Linux dependency tree was removed from the Windows checkout after verification.
 
 A read-only review found missing explicit strict compiler switches, a hidden bootstrap-failure state, and an unapproved Angular scaffold favicon. The fixes enabled TypeScript and Angular template strictness, added a tested visible privacy-safe startup fallback, removed the framework asset and raw theme color, and passed the full web suite and re-review without a remaining finding.
+
+## NFA-004 focused checks
+
+The maintainer approved the plan and implementation separately on 2026-08-31. The implementation adds the PostgreSQL and Flyway foundation only; Compose, task, workspace, source-file, step, and artifact schemas remain outside this story.
+
+Acceptance criteria were checked in their listed order:
+
+1. The lifecycle test started the application first with `local` and then with `container` against PostgreSQL 18.6; Maven Enforcer rejected any direct or transitive H2 dependency, and the runtime tree contained PostgreSQL JDBC 42.7.13 with no H2.
+2. Flyway 12.4.0 applied exactly `V1__create_installation_metadata.sql`; inspection found only `flyway_schema_history` and `installation_metadata` in the public schema and one successful V1 history row.
+3. Five configuration tests passed for accepted coordinates and rejected empty-password, unsafe-host, invalid-port, and unsafe-database cases; profile files contain no password default, and application code performs no direct environment read.
+4. A live HTTP check returned `200 {"status":"UP"}` with PostgreSQL available and `503 {"status":"DOWN"}` after it stopped; both responses omitted components, details, JDBC data, host, database, user, and the generated test password, while liveness stayed `UP`.
+5. The installation domain value and outbound port stay independent of JPA; the entity and Spring Data repository are package-private in the persistence adapter, and 9 ArchUnit rules passed including the concrete-adapter boundary.
+6. One run-owned Testcontainers scenario proved a clean database, migration, empty initial state, adapter write and read, duplicate rejection, Spring-context close and restart, retained data, safe health degradation, and explicit container cleanup; the post-run Testcontainers container query returned no resources.
+7. The development guide now requires new `V<n>__short_description.sql` files, forbids editing applied migrations, keeps Flyway clean disabled, and requires a new forward-only repair migration.
+
+The final Docker-hosted command ran Maven 3.9.16 on Java 21.0.12 and completed `clean verify` with 28 tests, 0 failures, 0 errors, and 0 skipped. Spotless kept 22 Java files clean, all 9 ArchUnit rules passed, and JaCoCo covered 114 of 118 lines, or 96.61%, with 21 of 26 branches covered.
+
+The exact nested-Docker verification and cleanup checks were:
+
+```bash
+docker run --rm \
+  --add-host=host.docker.internal:host-gateway \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -e TESTCONTAINERS_RYUK_DISABLED=true \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v nookforge-maven-cache:/root/.m2 \
+  -v "$PWD":/workspace \
+  -w /workspace/apps/api \
+  maven:3.9.16-eclipse-temurin-21 \
+  ./mvnw --batch-mode --no-transfer-progress clean verify
+
+docker ps -a \
+  --filter label=org.testcontainers=true \
+  --format '{{.ID}} {{.Image}} {{.Status}}'
+```
+
+The Maven command passed with the counts above, and the cleanup query returned no rows.
+
+The PostgreSQL image was `postgres:18.6-bookworm` at `postgres@sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af`. Spring Boot 4.1.1 managed Flyway 12.4.0, Testcontainers 2.0.5, and PostgreSQL JDBC 42.7.13.
+
+Docker Desktop could not expose the Ryuk callback port to the nested Maven build container. The successful verification therefore used `TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal`, disabled Ryuk for that build container only, and relied on the test's scoped `try` cleanup; a post-run Docker query confirmed that no Testcontainers resource remained. The expected database-down health probe logged a safe connection failure, and the existing non-failing Mockito dynamic-agent and Surefire dumpstream warnings remained.
+
+The first read-only review found two low-severity documentation issues: the current-state adapter-to-port arrow was reversed, and the verification record omitted the exact nested-Docker commands. Both were fixed, `git diff --check` stayed clean, and the focused re-review found no remaining issue.
 
 ## Release-wide checks
 

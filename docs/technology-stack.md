@@ -12,8 +12,9 @@ This page lists the approved direction. Package files, lock files, wrappers, ima
 | Maven Wrapper 3.3.4 / Maven 3.9.16 | Java build and pinned build entry | Generated and verified in `NFA-002` |
 | Angular 22.1.4 | standalone task and workspace user-interface shell | Verified by the `NFA-003` build |
 | TypeScript 6.0.3 strict mode | web contracts and checks | Verified by `NFA-003` |
-| PostgreSQL | task, workspace, file, step, and artifact metadata | Planned in `NFA-004` |
-| Flyway | schema history and repeatable local setup | Planned in `NFA-004` |
+| PostgreSQL 18.6 | durable foundation metadata | Verified by the `NFA-004` lifecycle test |
+| Flyway 12.4.0 | schema history and forward-only migrations | Verified by `NFA-004` |
+| PostgreSQL JDBC 42.7.13 | API database connection | Managed by Spring Boot 4.1.1 and verified by `NFA-004` |
 | Ollama | default and only model provider through 0.5 | Planned in `NFA-005` and `NFA-006` |
 | Docker Compose | supported local runtime | Planned in `NFA-005` |
 
@@ -36,7 +37,7 @@ A broad parser library may be used only if its dependency and security cost is r
 | Spring Problem Details | stable HTTP error format |
 | JUnit 6 and AssertJ | Java tests |
 | ArchUnit 1.5.0 | package boundary tests |
-| Testcontainers | PostgreSQL and runtime integration |
+| Testcontainers 2.0.5 | PostgreSQL and runtime integration |
 | Playwright | end-to-end flows and privacy-safe screenshots |
 | Spotless 3.9.0 and google-java-format 1.36.0 | stable Java source style |
 

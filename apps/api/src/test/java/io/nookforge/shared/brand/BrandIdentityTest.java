@@ -7,25 +7,18 @@ package io.nookforge.shared.brand;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import io.nookforge.bootstrap.NookForgeApplication;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
+import tools.jackson.databind.json.JsonMapper;
 
-@SpringBootTest(classes = NookForgeApplication.class)
 class BrandIdentityTest {
 
-  private final BrandIdentity brandIdentity;
-
-  @Autowired
-  BrandIdentityTest(BrandIdentity brandIdentity) {
-    this.brandIdentity = brandIdentity;
-  }
+  private final BrandIdentity brandIdentity =
+      new BrandConfiguration().brandIdentity(JsonMapper.builder().build());
 
   @Test
   void classpathBrandIsTheExactRepositoryResource() throws IOException {

@@ -2,7 +2,7 @@
 
 > **Turn local files into useful work.**
 
-![NFA-003 implemented](https://img.shields.io/badge/status-NFA--003%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
+![NFA-004 implemented](https://img.shields.io/badge/status-NFA--004%20implemented-2EA44F?style=flat-square&labelColor=2B3137)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square&labelColor=2B3137)](LICENSE)
 ![Local first](https://img.shields.io/badge/local--first-Ollama-2EA44F?style=flat-square&labelColor=2B3137)
 ![Java](https://img.shields.io/badge/Java-21-E76F00?style=flat-square&labelColor=2B3137&logo=openjdk&logoColor=white)
@@ -15,9 +15,9 @@ Nook Forge AI is a local-first workspace for analyzing files and ZIP archives, c
 
 ## Current status
 
-The repository baseline from `NFA-001`, the reviewed Spring Boot API shell from `NFA-002`, and the Angular shell from `NFA-003` are implemented. The API has a verified local HTTP foundation, while the web app has strict route boundaries, repository tokens, empty states, and an explicit unavailable-API state.
+The repository baseline from `NFA-001`, the reviewed Spring Boot API shell from `NFA-002`, the Angular shell from `NFA-003`, and the PostgreSQL and Flyway foundation from `NFA-004` are implemented. The API has validated local and container database profiles, a forward-only foundation migration, and database-aware readiness; the web app has strict route boundaries, repository tokens, empty states, and an explicit unavailable-API state.
 
-Both shells build and test independently, but together they remain a planning and governance baseline, not a runnable application or joined product workflow.
+The shells and database foundation build and test independently, but together they remain a planning and governance baseline, not a runnable application or joined product workflow.
 
 Product features remain planned until their owning stories are implemented and verified. Docker Compose, Ollama, Langfuse, Prometheus, and Grafana do not run in the current repository state.
 

@@ -15,16 +15,18 @@ python3 -m unittest discover \
 
 These checks need only Python 3 and do not install project dependencies.
 
-## NFA-002 API checks
+## API checks
 
-The API source includes focused context, configuration, brand-resource, HTTP-contract, safe-error, health-detail, and ArchUnit tests. They do not require Ollama, PostgreSQL, Docker Compose, or any other external service.
+The API source includes focused configuration, brand-resource, HTTP-contract, safe-error, persistence-lifecycle, health, and ArchUnit tests. Unit and web-slice tests do not require an external service. The lifecycle integration test uses a fresh PostgreSQL 18.6 Testcontainers instance and requires a reachable Docker daemon, but it does not require Docker Compose or Ollama.
 
-The official Wrapper command passes on Java 21 without external services:
+The official Wrapper command passes on Java 21 with Docker available:
 
 ```bash
 cd apps/api
 ./mvnw verify
 ```
+
+The PostgreSQL scenario runs Flyway against a clean database, checks the exact application-table set and schema-history row, writes through the outbound adapter, closes and restarts the Spring context against the retained database, and verifies safe readiness and liveness behavior before its run-owned container is removed.
 
 ## API test layers
 
