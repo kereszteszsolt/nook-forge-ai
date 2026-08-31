@@ -9,7 +9,7 @@ In progress. `NFA-001` and `NFA-002` are implemented, while the remaining Releas
 | Story | Plan approved | Implementation approved | Focused checks | Review | Commit approved | Commit hash | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
-| [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Pending | Pending | Implemented |
+| [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `9b4f4fb` | Implemented |
 | [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-005`](stories/NFA-005-add-docker-and-both-ollama-modes.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -32,7 +32,7 @@ Acceptance criteria were checked in their listed order:
 
 ## NFA-002 focused checks
 
-The maintainer approved the plan and implementation separately on 2026-08-31. The implementation scope is Java 21, Spring Boot 4.1.1, the minimal API package boundaries, validated configuration, canonical brand loading, safe system and health HTTP contracts, one `ProblemDetail` boundary, ArchUnit guards, and focused tests; PostgreSQL, Angular, Docker Compose, LangChain4j, Ollama, and provider clients remain out of scope.
+The maintainer approved the plan, implementation, and commit separately on 2026-08-31. Implementation commit `9b4f4fb` records Java 21, Spring Boot 4.1.1, the minimal API package boundaries, validated configuration, canonical brand loading, safe system and health HTTP contracts, one `ProblemDetail` boundary, ArchUnit guards, and focused tests; PostgreSQL, Angular, Docker Compose, LangChain4j, Ollama, and provider clients remain out of scope.
 
 Acceptance criteria were checked in their listed order:
 
