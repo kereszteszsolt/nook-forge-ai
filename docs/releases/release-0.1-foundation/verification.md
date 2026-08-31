@@ -8,7 +8,7 @@ In progress. `NFA-001` is implemented, while the remaining Release 0.1 stories s
 
 | Story | Plan approved | Implementation approved | Focused checks | Review | Commit approved | Commit hash | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | Pending | Implemented |
+| [`NFA-001`](stories/NFA-001-establish-the-repository-baseline.md) | Approved 2026-08-31 | Approved 2026-08-31 | Passed | Passed | Approved 2026-08-31 | `8b4d038` | Implemented |
 | [`NFA-002`](stories/NFA-002-build-the-spring-boot-app-shell.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-003`](stories/NFA-003-build-the-angular-app-shell-and-token-flow.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
 | [`NFA-004`](stories/NFA-004-add-postgresql-and-flyway.md) | Pending | Pending | Pending | Pending | Pending | Pending | Planned |
@@ -18,7 +18,7 @@ In progress. `NFA-001` is implemented, while the remaining Release 0.1 stories s
 
 ## NFA-001 focused checks
 
-The maintainer approved the plan, implementation, and commit separately on 2026-08-31. A read-only review found no issues; the commit hash remains pending until the commit succeeds.
+The maintainer approved the plan, implementation, and commit separately on 2026-08-31. A read-only review found no issues, and implementation commit `8b4d038` records the completed story.
 
 Acceptance criteria were checked in their listed order:
 
